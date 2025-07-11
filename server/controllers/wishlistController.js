@@ -75,12 +75,12 @@ class WishlistController {
 
   static async getUserWishlist(req, res, next) {
     try {
-      const UserId = req.user.id; // From authentication middleware
+      const UserId = req.user.id; 
   
       // Get all wishlist items for the user with car details
       const wishlistItems = await WishlistItem.findAll({
         where: { UserId },
-        attributes: ['id', 'UserId', 'CarId', 'createdAt', 'updatedAt'], // Explicitly include id
+        attributes: ['id', 'UserId', 'CarId', 'createdAt', 'updatedAt'], 
         include: [{
           model: Car,
           include: [{ model: Category }]
@@ -98,7 +98,7 @@ class WishlistController {
   
   static async removeFromWishlist(req, res, next) {
     try {
-      const UserId = req.user.id; // From authentication middleware
+      const UserId = req.user.id; 
       const { wishlistItemId } = req.params;
   
       // Try to find by id first, then by CarId as fallback

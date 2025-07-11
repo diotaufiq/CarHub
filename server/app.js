@@ -10,7 +10,22 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
-app.use(cors());
+const allowedOrigins = [
+  'https://ip-dio.web.app',
+  'https://diotaufiq.site'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true // <-- jika kamu nanti pakai cookie/token
+}));
+
 
 // Special handling for Stripe webhook route
 app.use((req, res, next) => {

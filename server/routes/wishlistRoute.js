@@ -14,6 +14,12 @@ router.post("/:carId", WishlistController.addToWishlist);
 // Middleware for routes that need wishlist validation
 router.use("/:userId/:carId", WishlistController.validateWishlistId);
 
+// Validation route for testing the middleware
+router.get("/:userId/:carId/validate", (req, res) => {
+  // If middleware passes, we reach here
+  res.status(200).json({ message: 'Wishlist item validated successfully' });
+});
+
 // Remove from wishlist
 router.delete('/:wishlistItemId', WishlistController.removeFromWishlist);
 
